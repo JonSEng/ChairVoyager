@@ -168,19 +168,19 @@ void postData()
   
   Serial.println(F("-------------------------------------"));
   
-  /* Read data until either the connection is closed, or the idle timeout is reached. */ 
-  unsigned long lastRead = millis();
-  while (www.connected() && (millis() - lastRead < IDLE_TIMEOUT_MS)) {
-    while (www.available()) {
-      char c = www.read();
-      Serial.print(c);
-      lastRead = millis();
-    }
-  }
+//  /* Read data until either the connection is closed, or the idle timeout is reached. */ 
+//  unsigned long lastRead = millis();
+//  while (www.connected() && (millis() - lastRead < IDLE_TIMEOUT_MS)) {
+//    while (www.available()) {
+//      char c = www.read();
+//      Serial.print(c);
+//      lastRead = millis();
+//    }
+//  }
   www.close();
   Serial.println(F("-------------------------------------"));
   
-  Serial.println(F("\n\nDisconnecting"));
+//  Serial.println(F("\n\nDisconnecting"));
 //  cc3000.disconnect();
   
 }
