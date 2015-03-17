@@ -61,8 +61,8 @@ Distributed as-is; no warranty is given.
 ////////////////////
 // WiFi Constants //
 ////////////////////
-char ap_ssid[] = "DLoft";                // SSID of network
-char ap_password[] = "Acts2:42-47";        // Password of network
+char ap_ssid[] = "CalVisitor";                // SSID of network
+char ap_password[] = "";        // Password of network
 unsigned int ap_security = WLAN_SEC_WPA2; // Security of network
 // ap_security can be any of: WLAN_SEC_UNSEC, WLAN_SEC_WEP, 
 //  WLAN_SEC_WPA, or WLAN_SEC_WPA2
@@ -76,8 +76,8 @@ SFE_CC3000_Client client = SFE_CC3000_Client(wifi);
 /////////////////
 // Phant Stuff //
 /////////////////
-const String publicKey = "aGgzgQa2wGcDWK8Oa1Km";
-const String privateKey = "KEezeKZMVECaW5E7VR5m";
+const String publicKey = "Jx3n8mWoYEsNwYYDwWM0";
+const String privateKey = "gzyxbaPDopiWVxxgVdBZ";
 const byte NUM_FIELDS = 1;
 const String fieldNames[NUM_FIELDS] = {"light"};
 String fieldData[NUM_FIELDS];
@@ -109,6 +109,7 @@ void loop()
   // If the trigger pin (3) goes low, send the data.
     // Gather data:
     fieldData[0] = String(analogRead(lightPin));
+    Serial.println("Reading light="+fieldData[0]);
 
     // Post data:
     Serial.println("Posting!");
@@ -119,7 +120,7 @@ void loop()
 
 void postData()
 {
-
+  Serial.println("In postData()");
   // Make a TCP connection to remote host
   if ( !client.connect(server, 80) )
   {
@@ -127,6 +128,7 @@ void postData()
     Serial.println(F("Error: 4"));
   }
 
+  Serial.println("postData(): client.printing");
   // Post the data! Request should look a little something like:
   // GET /input/publicKey?private_key=privateKey&light=1024&switch=0&time=5201 HTTP/1.1\n
   // Host: data.sparkfun.com\n
@@ -136,6 +138,7 @@ void postData()
   client.print(publicKey);
   client.print("?private_key=");
   client.print(privateKey);
+  Serial.println("Printing fieldNames,fieldData="+fieldNames[0]+fieldData[0]);
   for (int i=0; i<NUM_FIELDS; i++)
   {
     client.print("&");
@@ -148,6 +151,7 @@ void postData()
   client.println(server);
   client.println("Connection: close");
   client.println();
+  Serial.println("Connection closed");
 
   while (client.connected())
   {
