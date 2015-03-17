@@ -52,8 +52,8 @@ Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ
 
 // What page to grab!
 #define WEBSITE      "data.sparkfun.com"
-#define publicKey     "aGgzgQa2wGcDWK8Oa1Km"
-#define privateKey    "KEezeKZMVECaW5E7VR5m"
+#define publicKey     "Jx3n8mWoYEsNwYYDwWM0"
+#define privateKey    "gzyxbaPDopiWVxxgVdBZ"
 
 const byte NUM_FIELDS = 1;
 const char* fieldNames = "light";
@@ -122,59 +122,6 @@ void setup(void)
 
   cc3000.printIPdotsRev(ip);
   
-  // Optional: Do a ping test on the website
-  /*
-  Serial.print(F("\n\rPinging ")); cc3000.printIPdotsRev(ip); Serial.print("...");  
-  replies = cc3000.ping(ip, 5);
-  Serial.print(replies); Serial.println(F(" replies"));
-  */  
-
-  /* Try connecting to the website.
-     Note: HTTP/1.1 protocol is used to keep the server from closing the connection before all data is read.
-  */
-//  Adafruit_CC3000_Client www = cc3000.connectTCP(ip, 80);
-//  if (www.connected()) {
-//    www.fastrprint(F("GET /input/"));
-//    www.fastrprint(publicKey);
-//    www.fastrprint("?private_key=?");
-//    www.fastrprint(privateKey);
-//    Serial.print("Printing fieldnames:");
-//    Serial.println(fieldNames);
-//    Serial.print("Printing fielddata:");
-//    Serial.println(fieldData);
-//    www.fastrprint("&");
-//    www.fastrprint(fieldNames);
-//    www.fastrprint("=");
-//    www.fastrprint(fieldData);
-//    
-//    www.fastrprint(F(" HTTP/1.1\r\n"));
-//    www.fastrprint(F("Host: ")); www.fastrprint(WEBSITE); www.fastrprint(F("\r\n"));
-//    www.fastrprint(F("\r\n"));
-//    www.println();
-//  } else {
-//    Serial.println(F("Connection failed"));    
-//    return;
-//  }
-
-//  Serial.println(F("-------------------------------------"));
-//  
-//  /* Read data until either the connection is closed, or the idle timeout is reached. */ 
-//  unsigned long lastRead = millis();
-//  while (www.connected() && (millis() - lastRead < IDLE_TIMEOUT_MS)) {
-//    while (www.available()) {
-//      char c = www.read();
-//      Serial.print(c);
-//      lastRead = millis();
-//    }
-//  }
-//  www.close();
-//  Serial.println(F("-------------------------------------"));
-//  
-  /* You need to make sure to clean up after yourself or the CC3000 can freak out */
-  /* the next time your try to connect ... */
-//  Serial.println(F("\n\nDisconnecting"));
-//  cc3000.disconnect();
-  
 }
 
 void loop(void)
@@ -234,7 +181,7 @@ void postData()
   Serial.println(F("-------------------------------------"));
   
   Serial.println(F("\n\nDisconnecting"));
-  cc3000.disconnect();
+//  cc3000.disconnect();
   
 }
 
