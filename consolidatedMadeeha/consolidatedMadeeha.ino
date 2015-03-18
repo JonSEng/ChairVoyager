@@ -28,6 +28,7 @@ int debug = 0;
 int colorR[5]={100,182,66,63,80};
 int colorG[5]={93,50,82,123,99};
 int colorB[5]={64,39,109,65,70};
+int prevCountry = 4;
 
 char *colorOf[5] ={"BLACK","RED","BLUE","GREEN","WHITE"};
 
@@ -129,8 +130,16 @@ int countryTrack(int country) {
 
 void playAudio(int country){
   //Serial.println(country);
-  if (country != WHITE) {
-    wtv020sd16p.playVoice(countryTrack(country));
+  if (prevCountry == country) {
+    return;
+  }
+  else if (country != WHITE) {
+    prevCountry = country;
+    wtv020sd16p.asyncPlayVoice(countryTrack(country));
+  }
+  else {
+    prevCountry = country;
+    wtv020sd16p.stopVoice();
   }
 }
 
