@@ -61,8 +61,8 @@ Distributed as-is; no warranty is given.
 ////////////////////
 // WiFi Constants //
 ////////////////////
-char ap_ssid[] = "CalVisitor";                // SSID of network
-char ap_password[] = "";        // Password of network
+char ap_ssid[] = "Haley Rowland's iPhone";                // SSID of network
+char ap_password[] = "testing123";        // Password of network
 unsigned int ap_security = WLAN_SEC_WPA2; // Security of network
 // ap_security can be any of: WLAN_SEC_UNSEC, WLAN_SEC_WEP, 
 //  WLAN_SEC_WPA, or WLAN_SEC_WPA2
@@ -86,7 +86,7 @@ String fieldData[NUM_FIELDS];
 // Input Pins, Misc //
 //////////////////////
 const int triggerPin = 3;
-const int lightPin = A1;
+const int lightPin = A0;
 const int switchPin = 5;
 String name = "Anonymouse";
 boolean newName = true;

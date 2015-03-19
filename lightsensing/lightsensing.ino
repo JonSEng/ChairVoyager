@@ -2,7 +2,7 @@
 Adafruit Arduino - Lesson 9. Light sensing
 */
  
-int lightPin = 0;
+int lightPin = A0;
 int latchPin = 5;
 int clockPin = 6;
 int dataPin = 4;
@@ -14,6 +14,7 @@ void setup()
   pinMode(latchPin, OUTPUT);
   pinMode(dataPin, OUTPUT);  
   pinMode(clockPin, OUTPUT);
+  Serial.begin(115200);
 }
  
 void loop() 
@@ -21,14 +22,14 @@ void loop()
   Serial.println("sensing light");
   int reading  = analogRead(lightPin);
   Serial.println(reading);
-  int numLEDSLit = reading / 57;  //1023 / 9 / 2
-  if (numLEDSLit > 8) numLEDSLit = 8;
-  leds = 0;   // no LEDs lit tdo start
-  for (int i = 0; i < numLEDSLit; i++)
-  {
-    leds = leds + (1 << i);  // sets the i'th bit
-  }
-  updateShiftRegister();
+//  int numLEDSLit = reading / 57;  //1023 / 9 / 2
+//  if (numLEDSLit > 8) numLEDSLit = 8;
+//  leds = 0;   // no LEDs lit tdo start
+//  for (int i = 0; i < numLEDSLit; i++)
+//  {
+//    leds = leds + (1 << i);  // sets the i'th bit
+//  }
+//  updateShiftRegister();
 }
  
 void updateShiftRegister()
