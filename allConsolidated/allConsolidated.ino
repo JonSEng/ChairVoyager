@@ -52,9 +52,6 @@ boolean newName = true;
 
 //article array
 
-
-
-
 //audio stuff
 int resetPin = 2;  // The pin number of the reset pin.
 int clockPin = 3;  // The pin number of the clock pin.
@@ -88,18 +85,6 @@ char serialinput;
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
 
 float distance(int color1R, int color1G, int color1B, int color2){
-//  if (debug == DEEP_DIST) {
-//    Serial.print("(");
-//    Serial.print(color1R);
-//    Serial.print(",");
-//    Serial.print(color1G);
-//    Serial.print(",");
-//    Serial.print(color1B);
-//    Serial.print(") vs ");
-//    Serial.print(color2);
-//    Serial.print(": ");
-//  }
-  
   float step1 = powf((color1R-colorR[color2]),2);
 
   float step2 = powf((color1G-colorG[color2]),2);
@@ -107,53 +92,25 @@ float distance(int color1R, int color1G, int color1B, int color2){
   float step3 = powf((color1B-colorB[color2]),2);
 
   float dist = sqrt(step1+step2+step3);
-
-//  if (debug == DEEP_DIST) {
-//    Serial.print("Step 1: ");
-//    Serial.println(step1);
-//    Serial.print("Step 2: ");
-//    Serial.println(step2);
-//    Serial.print("Step 3: ");
-//    Serial.println(step3);
-//    Serial.print("dist: ");
-//    Serial.println(dist);
-//  }
-  
   return dist;
 }
 
 int minDistance(int color1R,int color1G, int color1B){
   int colorClosest;
   float dist=INFINITY;
-//  if (debug >= BASIC) {
-//    Serial.println("**START**");
-//  }
+
   for (int color=BLACK;color<=WHITE;color++){
     float d = distance(color1R,color1G,color1B,color);
-//    if (debug == DISTANCE) {
-//      Serial.println(color);
-//      Serial.println(d);
-//      Serial.println("====");
-//    }
     if (d<dist){
       dist = d;
-//      if (debug >= BASIC) {
-//        Serial.println(color);
-//      }
       colorClosest=color;
-//      if (debug >= BASIC) {
-//        Serial.println(color);
-//      }
     }
   }
-//  if (debug > BASIC) {
-//    Serial.println(colorClosest);
-//  }
+
   return colorClosest;
 }
 
 int countryTrack(int country) {
-  //srand(time(NULL));
   switch (country){
     case ASIA:
       Serial.println("Asia");
@@ -341,9 +298,6 @@ void loop() {
   for (int i=0; i<5; i++){
     min[i] = minDistance((int)r,(int)g,(int)b);
     ++res[min[i]];
-//    if (debug == DEEP_DIST) {
-//      Serial.println(min[i]);
-//    }
   }
   
   int m = 0;
@@ -358,7 +312,3 @@ void loop() {
   Serial.println(colorOf[maxVal]);
   playAudio(maxVal);
 }
-
-
-
-
